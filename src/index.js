@@ -34,7 +34,7 @@ fetchBreeds()
         
         selectorType.insertAdjacentHTML('beforeend',createSelectBread(data));
     })
-    .catch(err => {});
+    .catch(ero => {});
 
 
 function createSelectBread(arr) {
@@ -44,18 +44,18 @@ function createSelectBread(arr) {
 }
     
 
-
+// Другий запит
 
 function fetchCatByBreed(breedId) {
     
     const apiKey = 'live_gXfdXzaFDcewDJeq5HVifu2LVbBRmWM5pCaSZvmHUfx80lvNoLZkqGvP1sdopeeW'
     const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}&x-api-key=${apiKey}`
-
+    
 
     return fetch(url).then(resp => {
        
         if (!resp.ok) {
-            throw new Error('Erorr');
+            throw new Error('Error');
         }
         return resp.json();
         
@@ -63,16 +63,28 @@ function fetchCatByBreed(breedId) {
 
 }
 
-fetchCatByBreed().then(
-    data => {
-console.log(data)
-        
-    }
-)
-
-
-
 selectorType.addEventListener('change', (event) => {
-    
+    const selectedBreedId = event.target.value;
+
+    fetchCatByBreed(selectedBreedId).then(
+        data => {
+            console.log(data)
+
+            infoBoxe.innerHTML = createCatInfo(data);
+        }
+    ).catch(ero => { });
+});
+
+
+function createCatInfo(data) {
+    return data.map(({ reference_image_id, name, description, temperament }) => 
+    `<img src="" alt="">
+    <h1>${name}</h1>
+    <p>${description}</p>
+    <p>${temperament}</p>`).join(' ');
 }
-)
+
+
+
+    
+
