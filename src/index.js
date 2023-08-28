@@ -11,14 +11,19 @@ console.log(loaderElement);
 console.log(ErrorElement);
 console.log(infoBoxe);
 
+const searchOptions = {
+    headers: { 'x-api-key': 'live_gXfdXzaFDcewDJeq5HVifu2LVbBRmWM5pCaSZvmHUfx80lvNoLZkqGvP1sdopeeW' },
+}
+
+
 function fetchBreeds() {
-    const params = new URLSearchParams({
-        api_key:
-            'live_gXfdXzaFDcewDJeq5HVifu2LVbBRmWM5pCaSZvmHUfx80lvNoLZkqGvP1sdopeeW',
-    });
+    // const params = new URLSearchParams({
+    //     api_key:
+    //         'live_gXfdXzaFDcewDJeq5HVifu2LVbBRmWM5pCaSZvmHUfx80lvNoLZkqGvP1sdopeeW',
+    // });
 
     return fetch(
-        `https://api.thecatapi.com/v1/breeds?x-api-key=live_gXfdXzaFDcewDJeq5HVifu2LVbBRmWM5pCaSZvmHUfx80lvNoLZkqGvP1sdopeeW`
+        `https://api.thecatapi.com/v1/breeds?x-api-key=${searchOptions.headers}`
     ).then(resp => {
         if (!resp.ok) {
             throw new Error('Error');
@@ -48,12 +53,12 @@ function createSelectBread(arr) {
 
 function fetchCatByBreed(breedId) {
     
-    const apiKey = 'live_gXfdXzaFDcewDJeq5HVifu2LVbBRmWM5pCaSZvmHUfx80lvNoLZkqGvP1sdopeeW'
-    const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}&x-api-key=${apiKey}`
-    
+    // const apiKey = 'live_gXfdXzaFDcewDJeq5HVifu2LVbBRmWM5pCaSZvmHUfx80lvNoLZkqGvP1sdopeeW'
+    const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}&api-key=${searchOptions.headers}`
+    console.log(breedId)
 
     return fetch(url).then(resp => {
-       
+
         if (!resp.ok) {
             throw new Error('Error');
         }
@@ -65,7 +70,7 @@ function fetchCatByBreed(breedId) {
 
 selectorType.addEventListener('change', (event) => {
     const selectedBreedId = event.target.value;
-
+    console.log(event.target)
     fetchCatByBreed(selectedBreedId).then(
         data => {
             console.log(data)
@@ -76,12 +81,15 @@ selectorType.addEventListener('change', (event) => {
 });
 
 
-function createCatInfo(data) {
+function createCatInfo(data) { 
+    // console.log(data)
     return data.map(({ reference_image_id, name, description, temperament }) => 
+        
     `<img src="" alt="">
     <h1>${name}</h1>
     <p>${description}</p>
     <p>${temperament}</p>`).join(' ');
+    
 }
 
 
