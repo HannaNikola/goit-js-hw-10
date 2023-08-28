@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import NewsApiService from './cat-api';
 import SlimSelect from 'slim-select';
-
+import Notiflix from 'notiflix';
 
 
 const selectorType = document.querySelector('.breed-select');
@@ -36,6 +36,8 @@ fetchBreeds()
     .catch(ero => {
         loaderElement.style.display = 'block';
         errorElement.style.display = 'none';
+        infoBoxe.innerHTML = '';
+
   });
 
 function createSelectBread(arr) {
@@ -64,7 +66,8 @@ function fetchCatByBreed(breedId) {
 selectorType.addEventListener('change', event => {
     loaderElement.style.display = 'block';
     errorElement.style.display = 'none';
-  const selectedBreedId = event.target.value;
+
+    const selectedBreedId = event.target.value;
     fetchCatByBreed(selectedBreedId)
       
         .then(data => {
@@ -73,7 +76,8 @@ selectorType.addEventListener('change', event => {
         .catch(ero => {
           console.log('error');
           loaderElement.style.display = 'none';
-          errorElement.style.display = 'block';
+            errorElement.style.display = 'block';
+            infoBoxe.innerHTML = '';
         });
 });
 
