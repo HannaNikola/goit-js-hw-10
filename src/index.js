@@ -67,7 +67,8 @@ function fetchCatByBreed(breedId) {
 selectorType.addEventListener('change', event => {
     loaderElement.style.display = 'block';
   errorElement.style.display = 'none';
-  selectorType.style.display = 'none';
+  // selectorType.style.display = 'none';
+  infoBoxe.innerHTML = '';
   
 
     const selectedBreedId = event.target.value;
