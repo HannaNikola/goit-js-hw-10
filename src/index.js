@@ -71,6 +71,7 @@ selectorType.addEventListener('change', event => {
     fetchCatByBreed(selectedBreedId)
       
         .then(data => {
+            console.log(data);
           infoBoxe.innerHTML = createCatInfo(data);
         })
         .catch(ero => {
