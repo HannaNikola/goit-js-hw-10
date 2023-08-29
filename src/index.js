@@ -36,7 +36,8 @@ fetchBreeds()
     .catch(ero => {
         loaderElement.style.display = 'block';
         errorElement.style.display = 'none';
-        infoBoxe.innerHTML = '';
+      infoBoxe.innerHTML = '';
+      
 
   });
 
@@ -65,7 +66,9 @@ function fetchCatByBreed(breedId) {
 
 selectorType.addEventListener('change', event => {
     loaderElement.style.display = 'block';
-    errorElement.style.display = 'none';
+  errorElement.style.display = 'none';
+  selectorType.style.display = 'none';
+  
 
     const selectedBreedId = event.target.value;
     fetchCatByBreed(selectedBreedId)
@@ -76,14 +79,15 @@ selectorType.addEventListener('change', event => {
         })
         .catch(ero => {
           console.log('error');
-          loaderElement.style.display = 'none';
+            loaderElement.style.display = 'none';
             errorElement.style.display = 'block';
             infoBoxe.innerHTML = '';
+          
         });
 });
 
 function createCatInfo(data) {
-  console.log(data);
+  selectorType.style.display = 'block';
   loaderElement.style.display = 'none';
   const markup = `<img src=${data.url} alt=cat width= ${
     data.width / 3

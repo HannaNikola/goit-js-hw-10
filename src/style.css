@@ -7,6 +7,7 @@ body{
 .breed-select {
 margin-top: 30px;
 margin-left: 100px;
+display: block; 
 
 }
 
